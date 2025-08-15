@@ -25,7 +25,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-3">
-              <img src="/lovable-uploads/1c11d7dd-8fdd-4a68-a055-decfd04d4e99.png" alt="Exchagent логотип" className="h-8 w-auto" />
+              <img src="/lovable-uploads/1c11d7dd-8fdd-4a68-a055-decfd04d4e99.png" alt="Exchagent логотип" className="h-20 w-auto" />
               <span className="font-heading font-bold text-xl text-primary">Exchagent</span>
             </Link>
           </div>
