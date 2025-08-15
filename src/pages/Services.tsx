@@ -2,18 +2,19 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { ArrowRight, Bitcoin, DollarSign, Banknote } from "lucide-react";
+import ContactModal from "@/components/ContactModal";
 
 const Services = () => {
   const services = [
     {
       icon: Bitcoin,
       title: "Покупка криптовалюты",
-      description: "Для юридических и физических лиц с официальным договором на каждую сделку",
+      description: "Для юридических и физических лиц с официальным договором.",
       features: [
         "Договор на каждую сделку",
         "Оплата на расчётный счёт компании",
         "Возможность фиксации курса",
-        "Работа с любыми объёмами"
+        "От 15 000 USD"
       ],
       cta: "Оставить заявку на покупку"
     },
@@ -23,7 +24,7 @@ const Services = () => {
       description: "Перевод средств на ваш расчётный счёт с гарантией прозрачности через договор",
       features: [
         "Перевод на расчётный счёт",
-        "Гарантия прозрачности через договор",
+        "Гарантия прозрачности",
         "Быстрая обработка заявок",
         "Конкурентные курсы обмена"
       ],
@@ -60,10 +61,6 @@ const Services = () => {
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl font-heading">
             Услуги Exchagent
           </h1>
-          <p className="mt-6 text-xl text-muted-foreground max-w-3xl mx-auto font-body">
-            Легальные услуги по покупке, продаже и инкассации криптовалюты для юрлиц и физлиц. 
-            Официальные сделки с документами.
-          </p>
         </div>
       </section>
 
@@ -96,39 +93,18 @@ const Services = () => {
                   ))}
                 </div>
 
-                <Link to="/kontakty" className="block">
+                <ContactModal>
                   <Button variant="cta" className="w-full group">
                     {service.cta}
                     <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
-                </Link>
+                </ContactModal>
               </CardContent>
             </Card>
           ))}
         </div>
       </section>
 
-      {/* Supported Cryptocurrencies */}
-      <section className="bg-muted py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-heading">
-              Поддерживаемые криптовалюты
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto font-body">
-              Мы работаем с основными криптовалютами и готовы обсудить операции с другими цифровыми активами
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            {cryptoTypes.map((crypto, index) => (
-              <div key={index} className="bg-background rounded-lg p-4 text-center shadow-card">
-                <span className="font-body text-foreground">{crypto}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Process Overview */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -144,7 +120,7 @@ const Services = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
             { step: "1", title: "Заявка", description: "Отправляете запрос через сайт или по почте" },
-            { step: "2", title: "Договор", description: "Согласовываем условия и подписываем документы" },
+            { step: "2", title: "Договор", description: "Согласование условий" },
             { step: "3", title: "KYC", description: "Проводим идентификацию клиента и проверку средств" },
             { step: "4", title: "Сделка", description: "Осуществляем обмен и предоставляем отчётность" }
           ].map((item, index) => (
@@ -180,11 +156,11 @@ const Services = () => {
           <p className="text-xl text-white/90 max-w-2xl mx-auto mb-10 font-body">
             Наши эксперты проконсультируют вас по всем вопросам и подберут оптимальные условия
           </p>
-          <Link to="/kontakty">
+          <ContactModal>
             <Button variant="hero" size="xl" className="bg-white text-primary hover:bg-white/90">
               Получить консультацию
             </Button>
-          </Link>
+          </ContactModal>
         </div>
       </section>
     </div>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Shield, Building, Banknote } from "lucide-react";
+import ContactModal from "@/components/ContactModal";
 import heroImage from "@/assets/hero-crypto-business.jpg";
 import digitalFinanceImage from "@/assets/digital-finance.jpg";
 
@@ -10,7 +11,7 @@ const Home = () => {
     {
       icon: Shield,
       title: "Официально и по договору",
-      description: "Все сделки сопровождаются юридической документацией.",
+      description: "Сделки сопровождаются необходимой для Вас документацией.",
     },
     {
       icon: Building,
@@ -20,7 +21,7 @@ const Home = () => {
     {
       icon: Banknote,
       title: "Инкассация наличных",
-      description: "Приём и выдача наличных с KYC и фиксированными условиями.",
+      description: "Приём и выдача наличных с KYC, индивидуальный подход.",
     },
   ];
 
@@ -51,11 +52,11 @@ const Home = () => {
               Договор, прозрачные условия, сопровождение на каждом этапе.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <Link to="/kontakty">
+              <ContactModal>
                 <Button variant="hero" size="xl" className="w-full sm:w-auto">
                   Оставить заявку
                 </Button>
-              </Link>
+              </ContactModal>
               <Link to="/kontakty">
                 <Button variant="outline" size="xl" className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-primary">
                   Связаться с нами
@@ -88,9 +89,9 @@ const Home = () => {
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-heading">
             Наши преимущества
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto font-body">
-            Мы обеспечиваем максимальную безопасность и прозрачность всех операций с криптовалютой
-          </p>
+            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto font-body">
+              Мы обеспечиваем безопасность и прозрачность Криптовалютных Операций
+            </p>
         </div>
 
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -124,13 +125,13 @@ const Home = () => {
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-6 w-6 text-secondary mt-1 flex-shrink-0" />
                   <p className="text-muted-foreground font-body">
-                    <strong>Покупка криптовалюты</strong> — для юридических и физических лиц с договором на каждую сделку
+                    <strong>Покупка криптовалюты</strong> — для юридических и физических лиц с закрывающими документами
                   </p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-6 w-6 text-secondary mt-1 flex-shrink-0" />
                   <p className="text-muted-foreground font-body">
-                    <strong>Продажа криптовалюты</strong> — перевод средств на ваш расчётный счёт с гарантией прозрачности
+                    <strong>Продажа криптовалюты</strong> — гарантированный перевод средств на ваш расчётный счёт
                   </p>
                 </div>
                 <div className="flex items-start space-x-3">
@@ -163,18 +164,14 @@ const Home = () => {
       <section className="bg-gradient-hero text-white">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-heading mb-6">
-            Готовы начать работу с криптовалютой?
+            Свяжитесь с нами для обсуждения условий сотрудничества.
           </h2>
-          <p className="text-xl text-white/90 max-w-2xl mx-auto mb-10 font-body">
-            Свяжитесь с нами для обсуждения условий сделки. Наши эксперты проконсультируют 
-            вас по всем вопросам легального обмена криптовалют.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/kontakty">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
+            <ContactModal>
               <Button variant="hero" size="xl" className="bg-white text-primary hover:bg-white/90">
                 Получить консультацию
               </Button>
-            </Link>
+            </ContactModal>
             <Link to="/kak-eto-rabotaet">
               <Button variant="outline" size="xl" className="border-white text-white hover:bg-white hover:text-primary">
                 Как это работает

@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, TrendingUp, MapPin } from "lucide-react";
-import officeImage from "@/assets/office-building.jpg";
+import moscowCityImage from "@/assets/moscow-city.jpg";
 
 const About = () => {
   const facts = [
@@ -68,8 +68,8 @@ const About = () => {
           
           <div className="relative">
             <img
-              src={officeImage}
-              alt="Офис компании Exchagent"
+              src={moscowCityImage}
+              alt="Москва-Сити - финансовый центр"
               className="rounded-2xl shadow-elegant w-full"
             />
           </div>

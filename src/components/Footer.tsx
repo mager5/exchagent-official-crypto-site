@@ -5,7 +5,6 @@ const Footer = () => {
     { name: "Главная", href: "/" },
     { name: "О компании", href: "/o-kompanii" },
     { name: "Услуги", href: "/uslugi" },
-    { name: "Документы", href: "/dokumenty-i-dogovory" },
     { name: "Контакты", href: "/kontakty" },
   ];
 
@@ -25,10 +24,6 @@ const Footer = () => {
               Официальный партнёр в покупке и продаже цифровых активов. 
               Договор, прозрачные условия, сопровождение на каждом этапе.
             </p>
-            <div className="text-sm text-primary-foreground/60">
-              <p>ОГРН: 1234567890123</p>
-              <p>ИНН: 7701234567</p>
-            </div>
           </div>
 
           {/* Navigation Links */}

@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { FileText, Shield, CheckCircle, ArrowRight, Users, Clock, Building } from "lucide-react";
+import ContactModal from "@/components/ContactModal";
 
 const HowItWorks = () => {
   const steps = [
@@ -22,8 +23,7 @@ const HowItWorks = () => {
       description: "Согласовываем условия и подписываем договор электронно или на бумаге",
       details: [
         "Обсуждаем курс и условия сделки",
-        "Подготавливаем договор купли-продажи",
-        "Подписываем документы удобным способом"
+        "Подготавливаем договор купли-продажи"
       ],
       icon: Building
     },
@@ -34,7 +34,8 @@ const HowItWorks = () => {
       details: [
         "Верификация личности или юрлица",
         "Проверка источника средств",
-        "Соблюдение требований AML"
+        "Соблюдение требований AML",
+        "Подписываем документы удобным способом"
       ],
       icon: Shield
     },
@@ -43,7 +44,6 @@ const HowItWorks = () => {
       title: "Сделка",
       description: "Осуществляем приём/выдачу средств или криптовалюты согласно договору",
       details: [
-        "Проводим операцию обмена",
         "Контролируем все этапы процесса",
         "Обеспечиваем безопасность сделки"
       ],
@@ -56,7 +56,7 @@ const HowItWorks = () => {
       details: [
         "Акт выполненных работ",
         "Отчёт о проведённой операции",
-        "Справки для налоговой отчётности"
+        "Прочая документация для налоговой отчётности"
       ],
       icon: CheckCircle
     }
@@ -231,11 +231,11 @@ const HowItWorks = () => {
           Отправьте заявку, и мы свяжемся с вами в течение 2 часов для обсуждения условий сделки
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/kontakty">
+          <ContactModal>
             <Button variant="cta" size="xl">
               Отправить заявку
             </Button>
-          </Link>
+          </ContactModal>
           <Link to="/uslugi">
             <Button variant="outline" size="xl">
               Посмотреть услуги

@@ -258,12 +258,19 @@ const Contact = () => {
                 </div>
                 
                 <div>
-                  <h4 className="font-semibold text-foreground font-body mb-2">
-                    📱 Telegram
-                  </h4>
-                  <p className="text-muted-foreground font-body text-sm">
-                    Свяжитесь с менеджером для быстрых консультаций
-                  </p>
+                  <a 
+                    href="https://t.me/exchagent" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block hover:bg-accent/50 rounded-lg p-2 transition-colors"
+                  >
+                    <h4 className="font-semibold text-foreground font-body mb-2">
+                      📱 Telegram
+                    </h4>
+                    <p className="text-muted-foreground font-body text-sm">
+                      @exchagent
+                    </p>
+                  </a>
                 </div>
                 
                 <div>
