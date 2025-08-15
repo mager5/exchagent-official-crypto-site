@@ -33,9 +33,12 @@ const ContactModal = ({ children }: ContactModalProps) => {
     setIsLoading(true);
 
     try {
+      console.log("Sending form data:", formData);
       const { data, error } = await supabase.functions.invoke('send-email', {
         body: formData
       });
+
+      console.log("Supabase response:", { data, error });
 
       if (error) {
         throw error;

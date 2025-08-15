@@ -20,13 +20,29 @@ serve(async (req) => {
   }
 
   try {
+    console.log("Received request method:", req.method);
+    console.log("RESEND_API_KEY exists:", !!RESEND_API_KEY);
+    
     const formData: ContactFormData = await req.json()
+    console.log("Received form data:", formData);
     
     if (!formData.name || !formData.email || !formData.message) {
+      console.log("Validation failed: missing required fields");
       return new Response(
         JSON.stringify({ error: "Заполните все обязательные поля" }),
         { 
           status: 400, 
+          headers: { ...corsHeaders, "Content-Type": "application/json" } 
+        }
+      )
+    }
+
+    if (!RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not set");
+      return new Response(
+        JSON.stringify({ error: "Server configuration error" }),
+        { 
+          status: 500, 
           headers: { ...corsHeaders, "Content-Type": "application/json" } 
         }
       )
