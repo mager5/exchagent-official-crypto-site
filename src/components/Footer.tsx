@@ -52,12 +52,20 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-white/20">
+          <div className="mt-8 pt-8 border-t border-white/20">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-primary-foreground/60 text-sm">
               © 2025 Exchagent. Все права защищены.
             </p>
-            <div className="mt-4 md:mt-0">
+            <div className="flex flex-col md:flex-row items-center gap-4 mt-4 md:mt-0">
+              <a
+                href="https://t.me/exchagent"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-foreground/60 hover:text-white text-sm transition-colors"
+              >
+                📱 @exchagent
+              </a>
               <Link
                 to="/privacy"
                 className="text-primary-foreground/60 hover:text-white text-sm transition-colors"

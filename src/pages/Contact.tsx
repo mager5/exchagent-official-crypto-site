@@ -303,7 +303,7 @@ const Contact = () => {
               </Button>
             </a>
             <a href="tel:+74993257145">
-              <Button variant="outline" size="xl" className="border-white text-white hover:bg-white hover:text-primary">
+              <Button variant="outline" size="xl" className="border-white text-primary hover:bg-white hover:text-primary">
                 Позвонить сейчас
               </Button>
             </a>

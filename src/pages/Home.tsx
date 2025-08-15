@@ -58,7 +58,7 @@ const Home = () => {
                 </Button>
               </ContactModal>
               <Link to="/kontakty">
-                <Button variant="outline" size="xl" className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-primary">
+                <Button variant="outline" size="xl" className="w-full sm:w-auto border-white text-primary hover:bg-white hover:text-primary">
                   Связаться с нами
                 </Button>
               </Link>
@@ -173,7 +173,7 @@ const Home = () => {
               </Button>
             </ContactModal>
             <Link to="/kak-eto-rabotaet">
-              <Button variant="outline" size="xl" className="border-white text-white hover:bg-white hover:text-primary">
+              <Button variant="outline" size="xl" className="border-white text-primary hover:bg-white hover:text-primary">
                 Как это работает
               </Button>
             </Link>
