@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Send } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ContactModalProps {
   children: React.ReactNode;
@@ -19,8 +20,9 @@ const ContactModal = ({ children }: ContactModalProps) => {
     message: ""
   });
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.name || !formData.email || !formData.message) {
@@ -28,19 +30,33 @@ const ContactModal = ({ children }: ContactModalProps) => {
       return;
     }
 
-    // In a real application, this would send the data to office@exchagent.com
-    console.log("Form submitted:", formData);
-    
-    toast.success("Ваша заявка отправлена! Мы свяжемся с вами в течение 2 часов.");
-    
-    // Reset form and close modal
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      message: ""
-    });
-    setIsOpen(false);
+    setIsLoading(true);
+
+    try {
+      const { data, error } = await supabase.functions.invoke('send-email', {
+        body: formData
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      toast.success("Ваша заявка отправлена! Мы свяжемся с вами в течение 2 часов.");
+      
+      // Reset form and close modal
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: ""
+      });
+      setIsOpen(false);
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast.error("Произошла ошибка при отправке заявки. Попробуйте еще раз или свяжитесь с нами по телефону.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -113,9 +129,13 @@ const ContactModal = ({ children }: ContactModalProps) => {
             />
           </div>
 
-          <Button type="submit" variant="cta" size="lg" className="w-full group">
-            <Send className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" />
-            Отправить заявку
+          <Button type="submit" variant="cta" size="lg" className="w-full group" disabled={isLoading}>
+            {isLoading ? (
+              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+            ) : (
+              <Send className="h-4 w-4 mr-2 group-hover:translate-x-1 transition-transform" />
+            )}
+            {isLoading ? "Отправляем..." : "Отправить заявку"}
           </Button>
 
           <p className="text-sm text-muted-foreground font-body text-center">
