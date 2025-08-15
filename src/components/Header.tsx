@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import ContactModal from "@/components/ContactModal";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,7 +13,6 @@ const Header = () => {
     { name: "О компании", href: "/o-kompanii" },
     { name: "Услуги", href: "/uslugi" },
     { name: "Как это работает", href: "/kak-eto-rabotaet" },
-    { name: "Документы", href: "/dokumenty-i-dogovory" },
     { name: "Контакты", href: "/kontakty" },
   ];
 
@@ -24,10 +24,8 @@ const Header = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 rounded-full bg-gradient-hero flex items-center justify-center">
-                <span className="text-white font-bold text-sm">E</span>
-              </div>
+            <Link to="/" className="flex items-center space-x-3">
+              <img src="/lovable-uploads/922ee334-55f1-48ef-8373-3590a6fa1508.png" alt="Exchagent логотип" className="h-8 w-auto" />
               <span className="font-heading font-bold text-xl text-primary">Exchagent</span>
             </Link>
           </div>
@@ -53,11 +51,11 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Link to="/kontakty">
+            <ContactModal>
               <Button variant="cta" size="sm">
                 Оставить заявку
               </Button>
-            </Link>
+            </ContactModal>
           </div>
 
           {/* Mobile menu button */}
@@ -95,11 +93,11 @@ const Header = () => {
                 </Link>
               ))}
               <div className="pt-4">
-                <Link to="/kontakty" onClick={() => setIsMenuOpen(false)}>
-                  <Button variant="cta" size="sm" className="w-full">
+                <ContactModal>
+                  <Button variant="cta" size="sm" className="w-full" onClick={() => setIsMenuOpen(false)}>
                     Оставить заявку
                   </Button>
-                </Link>
+                </ContactModal>
               </div>
             </div>
           </div>

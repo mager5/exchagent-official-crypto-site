@@ -11,7 +11,7 @@ const buttonVariants = cva(
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary-glow shadow-card hover:shadow-elegant transform hover:-translate-y-1 transition-all duration-300",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 transition-all duration-300",
-        outline: "border border-primary text-primary bg-background hover:bg-primary hover:text-primary-foreground shadow-card hover:shadow-elegant transform hover:-translate-y-1 transition-all duration-300",
+        outline: "border border-primary text-primary bg-background hover:bg-primary hover:text-white shadow-card hover:shadow-elegant transform hover:-translate-y-1 transition-all duration-300",
         secondary: "bg-gradient-secondary text-secondary-foreground hover:opacity-90 shadow-card hover:shadow-elegant transform hover:-translate-y-1 transition-all duration-300",
         ghost: "hover:bg-accent hover:text-accent-foreground transition-all duration-300",
         link: "text-primary underline-offset-4 hover:underline transition-all duration-300",

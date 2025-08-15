@@ -14,10 +14,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Logo and Company Info */}
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">E</span>
-              </div>
+            <div className="flex items-center space-x-3 mb-4">
+              <img src="/lovable-uploads/922ee334-55f1-48ef-8373-3590a6fa1508.png" alt="Exchagent логотип" className="h-6 w-auto" />
               <span className="font-heading font-bold text-xl">Exchagent</span>
             </div>
             <p className="text-primary-foreground/80 text-sm mb-4">
