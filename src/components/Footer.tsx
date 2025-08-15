@@ -47,6 +47,16 @@ const Footer = () => {
             <div className="space-y-2 text-sm text-primary-foreground/80">
               <p>📧 office@exchagent.com</p>
               <p>📞 +7 (499) 325-71-45</p>
+              <p>
+                <a 
+                  href="https://t.me/exchagent" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  📱 @exchagent
+                </a>
+              </p>
               <p>📍 123317, Россия, Москва<br />Пресненская наб., 12</p>
             </div>
           </div>
