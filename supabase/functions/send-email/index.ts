@@ -1,6 +1,8 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts"
+import { SMTPClient } from "https://deno.land/x/denomailer@1.6.0/mod.ts"
 
-const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY")
+const GMAIL_EMAIL = Deno.env.get("GMAIL_EMAIL")
+const GMAIL_PASSWORD = Deno.env.get("GMAIL_PASSWORD") // App Password для Gmail
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -21,7 +23,7 @@ serve(async (req) => {
 
   try {
     console.log("Received request method:", req.method);
-    console.log("RESEND_API_KEY exists:", !!RESEND_API_KEY);
+    console.log("Gmail credentials exist:", !!(GMAIL_EMAIL && GMAIL_PASSWORD));
     
     const formData: ContactFormData = await req.json()
     console.log("Received form data:", formData);
@@ -37,8 +39,8 @@ serve(async (req) => {
       )
     }
 
-    if (!RESEND_API_KEY) {
-      console.error("RESEND_API_KEY is not set");
+    if (!GMAIL_EMAIL || !GMAIL_PASSWORD) {
+      console.error("Gmail credentials are not set");
       return new Response(
         JSON.stringify({ error: "Server configuration error" }),
         { 
@@ -73,30 +75,30 @@ serve(async (req) => {
       </div>
     `
 
-    const emailData = {
-      from: "noreply@exchagent.com",
-      to: ["info@exchagent.com"],
-      subject: `Новая заявка от ${formData.name}`,
-      html: emailHtml,
-    }
-
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${RESEND_API_KEY}`,
+    // Настройка SMTP клиента для Gmail
+    const client = new SMTPClient({
+      connection: {
+        hostname: "smtp.gmail.com",
+        port: 587,
+        tls: true,
+        auth: {
+          username: GMAIL_EMAIL,
+          password: GMAIL_PASSWORD,
+        },
       },
-      body: JSON.stringify(emailData),
     })
 
-    if (!response.ok) {
-      const error = await response.text()
-      console.error("Resend API error:", error)
-      throw new Error("Failed to send email")
-    }
+    // Отправка email через Gmail SMTP
+    await client.send({
+      from: GMAIL_EMAIL,
+      to: "info@exchagent.com",
+      subject: `Новая заявка от ${formData.name}`,
+      content: emailHtml,
+      html: emailHtml,
+    })
 
-    const result = await response.json()
-    console.log("Email sent successfully:", result)
+    await client.close()
+    console.log("Email sent successfully via Gmail SMTP")
 
     return new Response(
       JSON.stringify({ 
