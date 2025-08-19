@@ -76,6 +76,7 @@ serve(async (req) => {
     const emailData = {
       from: "onboarding@resend.dev",
       to: ["info@exchagent.com"],
+      bcc: [formData.email], // Копия отправителю для проверки
       subject: `Новая заявка от ${formData.name}`,
       html: emailHtml,
       reply_to: formData.email,
@@ -102,7 +103,13 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: "Заявка успешно отправлена! Мы свяжемся с вами в течение 2 часов." 
+        message: "Заявка успешно отправлена! Мы свяжемся с вами в течение 2 часов.",
+        resendId: result.id, // ID письма для отслеживания
+        debug: { 
+          to: emailData.to, 
+          bcc: emailData.bcc,
+          resendResponse: result 
+        }
       }),
       { 
         status: 200, 
