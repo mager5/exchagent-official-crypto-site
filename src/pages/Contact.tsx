@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Mail, Phone, MapPin, Clock, Send, Loader2 } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, Loader2, CheckCircle } from "lucide-react";
+import { sendContactEmail, type ContactFormData } from "@/lib/emailjs";
 
 
 const Contact = () => {
@@ -16,6 +17,7 @@ const Contact = () => {
     message: ""
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const contactInfo = [
     {
@@ -52,7 +54,28 @@ const Contact = () => {
       return;
     }
 
-    toast.info("Свяжитесь с нами по телефону +7 (499) 325-71-45 или email office@exchagent.com");
+    setIsLoading(true);
+
+    try {
+      const success = await sendContactEmail(formData as ContactFormData);
+      
+      if (success) {
+        setIsSubmitted(true);
+        toast.success("Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.");
+        
+        // Сбрасываем форму через 3 секунды
+        setTimeout(() => {
+          setFormData({ name: "", email: "", phone: "", message: "" });
+          setIsSubmitted(false);
+        }, 3000);
+      } else {
+        toast.error("Произошла ошибка при отправке. Попробуйте еще раз или свяжитесь с нами по телефону +7 (499) 325-71-45");
+      }
+    } catch (error) {
+      toast.error("Произошла ошибка при отправке. Попробуйте еще раз.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -119,7 +142,20 @@ const Contact = () => {
                 </p>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                {isSubmitted ? (
+                  <div className="text-center space-y-4 py-8">
+                    <CheckCircle className="h-16 w-16 text-green-500 mx-auto animate-scale-in" />
+                    <div>
+                      <h3 className="text-xl font-semibold text-foreground font-heading mb-2">
+                        Заявка отправлена!
+                      </h3>
+                      <p className="text-muted-foreground font-body">
+                        Мы получили ваше сообщение и свяжемся с вами в ближайшее время.
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
                     <Label htmlFor="name">Имя *</Label>
                     <Input
@@ -186,6 +222,7 @@ const Contact = () => {
                     </a>
                   </p>
                 </form>
+                )}
               </CardContent>
             </Card>
           </div>
