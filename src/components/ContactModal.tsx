@@ -35,13 +35,14 @@ const ContactModal = ({ children }: ContactModalProps) => {
     try {
       console.log("Sending form data:", formData);
       const { data, error } = await supabase.functions.invoke('send-email', {
-        body: formData
+        body: formData,
+        headers: { 'Content-Type': 'application/json' },
       });
 
       console.log("Supabase response:", { data, error });
 
       if (error) {
-        throw error;
+        throw new Error(error.message || 'Ошибка вызова функции send-email');
       }
 
       toast.success("Ваша заявка отправлена! Мы свяжемся с вами в течение 2 часов.");
@@ -54,9 +55,10 @@ const ContactModal = ({ children }: ContactModalProps) => {
         message: ""
       });
       setIsOpen(false);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error sending email:", error);
-      toast.error("Произошла ошибка при отправке заявки. Попробуйте еще раз или свяжитесь с нами по телефону.");
+      const message = error?.message || "Произошла ошибка при отправке заявки. Попробуйте еще раз или свяжитесь с нами по телефону.";
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }
