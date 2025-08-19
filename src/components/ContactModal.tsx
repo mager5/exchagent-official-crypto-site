@@ -30,76 +30,7 @@ const ContactModal = ({ children }: ContactModalProps) => {
       return;
     }
 
-    setIsLoading(true);
-
-    try {
-      console.log("Sending form data via FormSubmit:", formData);
-      const response = await fetch("https://formsubmit.co/ajax/info@exchagent.com", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({
-          ...formData,
-          _subject: `Новая заявка от ${formData.name} (сайт Exchagent)`,
-          _replyto: formData.email
-        })
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`FormSubmit error: ${errorText}`);
-      }
-      const result = await response.json();
-      console.log("FormSubmit response:", result);
-      if (!result.success) {
-        throw new Error("Не удалось отправить заявку. Повторите попытку позже.");
-      }
-
-      toast.success("Ваша заявка отправлена! Мы свяжемся с вами в течение 2 часов.");
-      
-      // Reset form and close modal
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        message: ""
-      });
-      setIsOpen(false);
-    } catch (error: any) {
-      console.error("Error sending via AJAX, falling back to native POST:", error);
-      try {
-        const form = document.createElement('form');
-        form.action = 'https://formsubmit.co/info@exchagent.com';
-        form.method = 'POST';
-        form.target = '_self';
-        const add = (name: string, value: string) => {
-          const input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = name;
-          input.value = value;
-          form.appendChild(input);
-        };
-        add('name', formData.name);
-        add('email', formData.email);
-        add('phone', formData.phone);
-        add('message', formData.message);
-        add('_subject', `Новая заявка от ${formData.name} (сайт Exchagent)`);
-        add('_replyto', formData.email);
-        add('_captcha', 'false');
-        add('_next', window.location.origin + '/kontakty?sent=1');
-        document.body.appendChild(form);
-        form.submit();
-        toast.info('Мы открыли страницу отправки. Подтвердите письмо от FormSubmit для активации доставки.');
-      } catch (fallbackErr: any) {
-        console.error('Fallback form submit failed:', fallbackErr);
-        const message = fallbackErr?.message || 'Произошла ошибка при отправке заявки. Попробуйте позже или свяжитесь с нами по телефону.';
-        toast.error(message);
-      }
-    } finally {
-      setIsLoading(false);
-    }
+    toast.info("Свяжитесь с нами по телефону +7 (499) 325-71-45 или email office@exchagent.com");
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
