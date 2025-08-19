@@ -52,6 +52,7 @@ export const sendContactEmail = async (formData: ContactFormData): Promise<boole
         hour: '2-digit',
         minute: '2-digit'
       }),
+      to_email: 'info@exchagent.com',
     };
 
     // Отправляем email
