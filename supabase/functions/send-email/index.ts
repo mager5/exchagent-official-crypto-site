@@ -74,7 +74,7 @@ serve(async (req) => {
     `
 
     const emailData = {
-      from: "noreply@exchagent.com",
+      from: "Exchagent <onboarding@resend.dev>",
       to: ["info@exchagent.com"],
       subject: `Новая заявка от ${formData.name}`,
       html: emailHtml,
