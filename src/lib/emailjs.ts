@@ -40,25 +40,12 @@ export const sendContactEmail = async (formData: ContactFormData): Promise<boole
   try {
     // Подготавливаем данные для шаблона
     const templateParams = {
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone || 'Не указан',
+      from_name: formData.name,
+      from_email: formData.email,
+      from_phone: formData.phone || 'Не указан',
       message: formData.message,
-      time: new Date().toLocaleString('ru-RU', {
-        year: 'numeric',
-        month: 'long', 
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      }),
+      to_name: 'Exchagent',
     };
-
-    // Логируем что отправляем
-    console.log('Отправляем в EmailJS:', {
-      serviceId: emailjsConfig.serviceId,
-      templateId: emailjsConfig.templateId,
-      templateParams
-    });
 
     // Отправляем email
     const result = await emailjs.send(
