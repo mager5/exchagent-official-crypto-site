@@ -73,12 +73,19 @@ serve(async (req) => {
       </div>
     `
 
+    const additionalRecipient = Deno.env.get("GMAIL_EMAIL")
+    const toEmails = ["info@exchagent.com", additionalRecipient].filter((e): e is string => !!e)
+    console.log("Email recipients resolved:", toEmails)
+
+    const plainText = `Новая заявка с сайта Exchagent\nИмя: ${formData.name}\nEmail: ${formData.email}\n${formData.phone ? `Телефон: ${formData.phone}\n` : ''}Сообщение:\n${formData.message}\n\nДата отправки: ${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })}`
+
     const emailData = {
-      from: "onboarding@resend.dev",
-      to: ["info@exchagent.com"],
+      from: "Exchagent <onboarding@resend.dev>",
+      to: toEmails,
       bcc: [formData.email], // Копия отправителю для проверки
       subject: `Новая заявка от ${formData.name}`,
       html: emailHtml,
+      text: plainText,
       reply_to: formData.email,
     }
 
