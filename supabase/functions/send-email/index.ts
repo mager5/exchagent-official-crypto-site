@@ -74,10 +74,11 @@ serve(async (req) => {
     `
 
     const emailData = {
-      from: "Exchagent <onboarding@resend.dev>",
+      from: "onboarding@resend.dev",
       to: ["info@exchagent.com"],
       subject: `Новая заявка от ${formData.name}`,
       html: emailHtml,
+      reply_to: formData.email,
     }
 
     const response = await fetch("https://api.resend.com/emails", {
