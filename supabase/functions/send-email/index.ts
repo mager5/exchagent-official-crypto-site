@@ -92,9 +92,15 @@ serve(async (req) => {
     })
 
     if (!response.ok) {
-      const error = await response.text()
-      console.error("Resend API error:", error)
-      throw new Error("Failed to send email")
+      const errorText = await response.text()
+      console.error("Resend API error:", errorText)
+      return new Response(
+        JSON.stringify({ error: "Resend API error", details: errorText }),
+        {
+          status: response.status,
+          headers: { ...corsHeaders, "Content-Type": "application/json" }
+        }
+      )
     }
 
     const result = await response.json()
@@ -116,11 +122,12 @@ serve(async (req) => {
         headers: { ...corsHeaders, "Content-Type": "application/json" } 
       }
     )
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error in send-email function:", error)
     return new Response(
       JSON.stringify({ 
-        error: "Произошла ошибка при отправке заявки. Попробуйте еще раз или свяжитесь с нами по телефону." 
+        error: "Произошла ошибка при отправке заявки",
+        details: error?.message || String(error)
       }),
       { 
         status: 500, 
