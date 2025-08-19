@@ -53,6 +53,13 @@ export const sendContactEmail = async (formData: ContactFormData): Promise<boole
       }),
     };
 
+    // Логируем что отправляем
+    console.log('Отправляем в EmailJS:', {
+      serviceId: emailjsConfig.serviceId,
+      templateId: emailjsConfig.templateId,
+      templateParams
+    });
+
     // Отправляем email
     const result = await emailjs.send(
       emailjsConfig.serviceId!,
