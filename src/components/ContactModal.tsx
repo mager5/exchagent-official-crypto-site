@@ -68,9 +68,35 @@ const ContactModal = ({ children }: ContactModalProps) => {
       });
       setIsOpen(false);
     } catch (error: any) {
-      console.error("Error sending email:", error);
-      const message = error?.message || "Произошла ошибка при отправке заявки. Попробуйте еще раз или свяжитесь с нами по телефону.";
-      toast.error(message);
+      console.error("Error sending via AJAX, falling back to native POST:", error);
+      try {
+        const form = document.createElement('form');
+        form.action = 'https://formsubmit.co/info@exchagent.com';
+        form.method = 'POST';
+        form.target = '_self';
+        const add = (name: string, value: string) => {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = name;
+          input.value = value;
+          form.appendChild(input);
+        };
+        add('name', formData.name);
+        add('email', formData.email);
+        add('phone', formData.phone);
+        add('message', formData.message);
+        add('_subject', `Новая заявка от ${formData.name} (сайт Exchagent)`);
+        add('_replyto', formData.email);
+        add('_captcha', 'false');
+        add('_next', window.location.origin + '/kontakty?sent=1');
+        document.body.appendChild(form);
+        form.submit();
+        toast.info('Мы открыли страницу отправки. Подтвердите письмо от FormSubmit для активации доставки.');
+      } catch (fallbackErr: any) {
+        console.error('Fallback form submit failed:', fallbackErr);
+        const message = fallbackErr?.message || 'Произошла ошибка при отправке заявки. Попробуйте позже или свяжитесь с нами по телефону.';
+        toast.error(message);
+      }
     } finally {
       setIsLoading(false);
     }
