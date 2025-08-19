@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Send, Loader2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+
 
 interface ContactModalProps {
   children: React.ReactNode;
@@ -33,16 +33,28 @@ const ContactModal = ({ children }: ContactModalProps) => {
     setIsLoading(true);
 
     try {
-      console.log("Sending form data:", formData);
-      const { data, error } = await supabase.functions.invoke('send-email', {
-        body: formData,
-        headers: { 'Content-Type': 'application/json' },
+      console.log("Sending form data via FormSubmit:", formData);
+      const response = await fetch("https://formsubmit.co/ajax/info@exchagent.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          ...formData,
+          _subject: `Новая заявка от ${formData.name} (сайт Exchagent)`,
+          _replyto: formData.email
+        })
       });
 
-      console.log("Supabase response:", { data, error });
-
-      if (error) {
-        throw new Error(error.message || 'Ошибка вызова функции send-email');
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`FormSubmit error: ${errorText}`);
+      }
+      const result = await response.json();
+      console.log("FormSubmit response:", result);
+      if (!result.success) {
+        throw new Error("Не удалось отправить заявку. Повторите попытку позже.");
       }
 
       toast.success("Ваша заявка отправлена! Мы свяжемся с вами в течение 2 часов.");
