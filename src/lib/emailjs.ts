@@ -40,11 +40,18 @@ export const sendContactEmail = async (formData: ContactFormData): Promise<boole
   try {
     // Подготавливаем данные для шаблона
     const templateParams = {
-      from_name: formData.name,
-      from_email: formData.email,
-      from_phone: formData.phone || 'Не указан',
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone || 'Не указан',
       message: formData.message,
-      to_name: 'Exchagent',
+      time: new Date().toLocaleString('ru-RU', {
+        timeZone: 'Europe/Moscow',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      }),
     };
 
     // Отправляем email
