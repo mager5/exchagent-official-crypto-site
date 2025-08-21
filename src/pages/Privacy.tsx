@@ -155,7 +155,7 @@ const Privacy = () => {
               <ul className="list-disc pl-6 space-y-2 mb-4">
                 <li>Email: office@exchagent.com</li>
                 <li>Телефон: +7 (499) 325-71-45</li>
-                <li>Telegram: @exchagent</li>
+                <li>телеграм: @exchagent</li>
                 <li>Адрес: 123317, Россия, Москва, Пресненская наб., 12</li>
               </ul>
             </div>
