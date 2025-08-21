@@ -40,6 +40,7 @@ export const sendContactEmail = async (formData: ContactFormData): Promise<boole
   try {
     // Подготавливаем данные для шаблона
     const templateParams = {
+      // Основные данные заявки
       name: formData.name,
       email: formData.email,
       phone: formData.phone || 'Не указан',
@@ -52,7 +53,12 @@ export const sendContactEmail = async (formData: ContactFormData): Promise<boole
         hour: '2-digit',
         minute: '2-digit'
       }),
+      
+      // Настройки для лучшей доставляемости
       to_email: 'info@exchagent.com',
+      reply_to: formData.email, // Важно для Reply-To заголовка
+      from_name: 'Exchagent - Новая заявка', // Узнаваемое имя отправителя
+      subject: `Новая заявка с сайта от ${formData.name}`, // Четкий subject без спам-слов
       // Контактные данные компании для автоответа
       company_name: 'Exchagent',
       company_email: 'office@exchagent.com',
