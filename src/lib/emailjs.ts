@@ -61,7 +61,7 @@ export const sendContactEmail = async (formData: ContactFormData): Promise<boole
       subject: `Новая заявка с сайта от ${formData.name}`, // Четкий subject без спам-слов
       // Контактные данные компании для автоответа
       company_name: 'Exchagent',
-      company_email: 'office@exchagent.com',
+      company_email: 'info@exchagent.com',
       company_phone: '+7 (499) 325-71-45',
       company_telegram: '@exchagent',
       company_telegram_link: 'https://t.me/exchagent',

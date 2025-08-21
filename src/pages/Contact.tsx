@@ -23,7 +23,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      details: "office@exchagent.com",
+      details: "info@exchagent.com",
       description: "Отправьте заявку на официальную почту"
     },
     {
@@ -309,7 +309,7 @@ const Contact = () => {
                     📧 Email для партнёров
                   </h4>
                   <p className="text-muted-foreground font-body text-sm">
-                    office@exchagent.com
+                  info@exchagent.com
                   </p>
                 </div>
               </CardContent>
@@ -328,7 +328,7 @@ const Contact = () => {
             Получите персональную консультацию и узнайте актуальные условия для ваших операций
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="mailto:office@exchagent.com">
+            <a href="mailto:info@exchagent.com">
               <Button variant="hero" size="xl" className="bg-white text-primary hover:bg-white/90">
                 Написать на почту
               </Button>

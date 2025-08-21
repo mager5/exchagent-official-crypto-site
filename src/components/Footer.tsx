@@ -45,7 +45,7 @@ const Footer = () => {
           <div>
             <h3 className="font-heading font-semibold mb-4">Контакты</h3>
             <div className="space-y-2 text-sm text-primary-foreground/80">
-              <p>📧 office@exchagent.com</p>
+              <p>📧 info@exchagent.com</p>
               <p>📞 +7 (499) 325-71-45</p>
               <p>
                 <a 
