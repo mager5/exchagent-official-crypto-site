@@ -49,7 +49,7 @@ const Footer = () => {
               <p>📞 +7 (499) 325-71-45</p>
               <p>
                 <a 
-                  href="https://t.me/exchagent" 
+                  href="tme://resolve?domain=exchagent" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
@@ -69,7 +69,7 @@ const Footer = () => {
             </p>
             <div className="flex flex-col md:flex-row items-center gap-4 mt-4 md:mt-0">
               <a
-                href="https://t.me/exchagent"
+                href="tme://resolve?domain=exchagent"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary-foreground/60 hover:text-white text-sm transition-colors"
