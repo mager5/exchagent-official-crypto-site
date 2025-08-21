@@ -58,7 +58,7 @@ export const sendContactEmail = async (formData: ContactFormData): Promise<boole
       company_email: 'office@exchagent.com',
       company_phone: '+7 (499) 325-71-45',
       company_telegram: '@exchagent',
-      company_telegram_link: 'tme://resolve?domain=exchagent',
+      company_telegram_link: 'https://t.me/Exchagent',
       company_address: '123317, Россия, Москва, Пресненская наб., 12',
       company_description: 'Официальный партнёр в покупке и продаже цифровых активов. Договор, прозрачные условия, сопровождение на каждом этапе.',
       website_url: window.location.origin,

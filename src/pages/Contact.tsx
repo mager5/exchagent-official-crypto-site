@@ -290,7 +290,7 @@ const Contact = () => {
                 
                 <div>
                   <a 
-                    href="tme://resolve?domain=exchagent" 
+                    href="https://t.me/Exchagent" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="block hover:bg-accent/50 rounded-lg p-2 transition-colors"
