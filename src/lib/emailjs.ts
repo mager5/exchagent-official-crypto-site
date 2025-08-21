@@ -43,7 +43,8 @@ export const sendContactEmail = async (formData: ContactFormData): Promise<boole
       // Основные данные заявки
       name: formData.name,
       email: formData.email,
-      phone: formData.phone || 'Не указан',
+      phone: formData.phone || '',
+      phone_display: formData.phone ? formData.phone : 'Не указан',
       message: formData.message,
       time: new Date().toLocaleString('ru-RU', {
         timeZone: 'Europe/Moscow',
