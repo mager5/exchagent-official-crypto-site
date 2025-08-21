@@ -54,7 +54,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
                 >
-                  📱 @Exchagent
+                  📱 @exchagent
                 </a>
               </p>
               <p>📍 123317, Россия, Москва<br />Пресненская наб., 12</p>
@@ -74,7 +74,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="text-primary-foreground/60 hover:text-white text-sm transition-colors"
               >
-                📱 @Exchagent
+                📱 @exchagent
               </a>
               <Link
                 to="/privacy"
