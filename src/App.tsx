@@ -19,7 +19,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename={import.meta.env.PROD ? '/exchagent-official-crypto-site' : '/'}>
+      <BrowserRouter basename={'/'}>
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
