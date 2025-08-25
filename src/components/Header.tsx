@@ -58,12 +58,12 @@ const Header = () => {
 
           {/* Tablet Navigation (768-996px) */}
           <div className="hidden md:block md-lg:hidden">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center justify-center space-x-1">
               {navigation.slice(0, 3).map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`px-2 py-1 rounded-md text-xs font-medium transition-colors hover:text-primary ${
+                  className={`px-1.5 py-1 rounded-md text-xs font-medium transition-colors hover:text-primary ${
                     isActive(item.href)
                       ? "text-primary bg-accent"
                       : "text-muted-foreground hover:bg-accent"
@@ -73,7 +73,7 @@ const Header = () => {
                 </Link>
               ))}
               <ContactModal>
-                <Button variant="cta" size="sm" className="text-xs px-3">
+                <Button variant="cta" size="sm" className="text-xs px-2 py-1 ml-1">
                   Заявка
                 </Button>
               </ContactModal>
