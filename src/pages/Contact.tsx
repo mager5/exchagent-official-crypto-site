@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Mail, Phone, MapPin, Clock, Send, Loader2, CheckCircle } from "lucide-react";
 import { sendContactEmail, type ContactFormData } from "@/lib/emailjs";
+import { formatPhoneNumber } from "@/lib/phoneUtils";
 
 
 const Contact = () => {
@@ -78,12 +79,24 @@ const Contact = () => {
     }
   };
 
+  // Используем утилитную функцию для форматирования телефона
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    
+    if (name === 'phone') {
+      // Применяем маску для телефона
+      const formattedPhone = formatPhoneNumber(value);
+      setFormData(prev => ({
+        ...prev,
+        [name]: formattedPhone
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
   };
 
   return (
