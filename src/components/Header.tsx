@@ -24,14 +24,21 @@ const Header = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-3">
+            <Link 
+              to="/" 
+              className="flex items-center space-x-3"
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = '/';
+              }}
+            >
               <img src="./lovable-uploads/1c11d7dd-8fdd-4a68-a055-decfd04d4e99.png" alt="Exchagent логотип" className="h-20 w-auto" />
               <span className="font-heading font-bold text-xl text-primary">Exchagent</span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
+          <div className="hidden md-lg:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navigation.map((item) => (
                 <Link
@@ -49,8 +56,32 @@ const Header = () => {
             </div>
           </div>
 
+          {/* Tablet Navigation (768-996px) */}
+          <div className="hidden md:block md-lg:hidden">
+            <div className="flex items-center space-x-2">
+              {navigation.slice(0, 3).map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`px-2 py-1 rounded-md text-xs font-medium transition-colors hover:text-primary ${
+                    isActive(item.href)
+                      ? "text-primary bg-accent"
+                      : "text-muted-foreground hover:bg-accent"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <ContactModal>
+                <Button variant="cta" size="sm" className="text-xs px-3">
+                  Заявка
+                </Button>
+              </ContactModal>
+            </div>
+          </div>
+
           {/* CTA Button */}
-          <div className="hidden md:block">
+          <div className="hidden md-lg:block">
             <ContactModal>
               <Button variant="cta" size="sm">
                 Оставить заявку

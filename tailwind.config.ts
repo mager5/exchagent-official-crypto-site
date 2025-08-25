@@ -17,6 +17,15 @@ export default {
 				'2xl': '1400px'
 			}
 		},
+		screens: {
+			'sm': '640px',
+			'md': '768px',
+			'lg': '1024px',
+			'xl': '1280px',
+			'2xl': '1536px',
+			// Кастомный брейкпоинт для диапазона 768-996px
+			'md-lg': '996px',
+		},
 		extend: {
 			fontFamily: {
 				heading: ['Montserrat', 'sans-serif'],
