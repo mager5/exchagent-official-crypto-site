@@ -122,3 +122,27 @@ All colors MUST be HSL.
     @apply font-heading;
   }
 }
+
+/* Предотвращение зума на мобильных устройствах при фокусе на input и textarea */
+@media screen and (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="search"],
+  input[type="url"],
+  textarea {
+    font-size: 16px !important;
+    transform-origin: left top;
+    transition: none;
+  }
+
+  /* Дополнительная защита от зума */
+  input:focus,
+  textarea:focus {
+    font-size: 16px !important;
+    zoom: 1;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+}
