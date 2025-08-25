@@ -30,6 +30,7 @@ All colors MUST be HSL.
     /* Neutral Gray */
     --muted: 0 0% 96%; /* #F5F5F5 */
     --muted-foreground: 210 5% 40%;
+    --placeholder: 210 5% 60%; /* Более светлый цвет для placeholder */
     
     --accent: 210 100% 95%;
     --accent-foreground: 210 100% 11%;
@@ -86,6 +87,7 @@ All colors MUST be HSL.
 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
+    --placeholder: 215 15% 75%; /* Более светлый цвет для placeholder в темной теме */
 
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
