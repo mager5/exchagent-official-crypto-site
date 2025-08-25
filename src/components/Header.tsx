@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
@@ -7,6 +7,20 @@ import ContactModal from "@/components/ContactModal";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+
+  // Блокировка прокрутки при открытом бургер-меню
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    // Очистка при размонтировании компонента
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
 
   const navigation = [
     { name: "Главная", href: "/" },
@@ -93,22 +107,28 @@ const Header = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-muted-foreground hover:text-primary hover:bg-accent"
-              aria-expanded="false"
+              className="inline-flex items-center justify-center p-2 rounded-md text-muted-foreground hover:text-primary hover:bg-accent transition-colors duration-200"
+              aria-expanded={isMenuOpen}
             >
-              {isMenuOpen ? (
-                <X className="h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="h-6 w-6" aria-hidden="true" />
-              )}
+              <div className="relative w-6 h-6">
+                <Menu 
+                  className={`absolute h-6 w-6 transition-all duration-300 ${isMenuOpen ? 'opacity-0 rotate-180' : 'opacity-100 rotate-0'}`} 
+                  aria-hidden="true" 
+                />
+                <X 
+                  className={`absolute h-6 w-6 transition-all duration-300 ${isMenuOpen ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-180'}`} 
+                  aria-hidden="true" 
+                />
+              </div>
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t border-border">
+        <div className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
+          isMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+        }`}>
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t border-border">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
@@ -125,14 +145,13 @@ const Header = () => {
               ))}
               <div className="pt-4">
                 <ContactModal>
-                  <Button variant="cta" size="sm" className="w-full" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="cta" size="lg" className="w-full h-12" onClick={() => setIsMenuOpen(false)}>
                     Оставить заявку
                   </Button>
                 </ContactModal>
               </div>
-            </div>
           </div>
-        )}
+        </div>
       </nav>
     </header>
   );
