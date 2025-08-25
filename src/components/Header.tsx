@@ -59,7 +59,7 @@ const Header = () => {
           {/* Tablet Navigation (768-996px) */}
           <div className="hidden md:block md-lg:hidden">
             <div className="flex items-center justify-center space-x-1">
-              {navigation.slice(0, 3).map((item) => (
+              {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
