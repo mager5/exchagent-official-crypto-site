@@ -12,7 +12,15 @@ export const formatPhoneNumber = (value: string): string => {
   const phoneNumber = value.replace(/\D/g, '');
   
   // Если номер начинается с 8, заменяем на 7
-  const normalizedNumber = phoneNumber.startsWith('8') ? '7' + phoneNumber.slice(1) : phoneNumber;
+  // Если номер начинается с 9, добавляем префикс 7
+  let normalizedNumber;
+  if (phoneNumber.startsWith('8')) {
+    normalizedNumber = '7' + phoneNumber.slice(1);
+  } else if (phoneNumber.startsWith('9')) {
+    normalizedNumber = '7' + phoneNumber;
+  } else {
+    normalizedNumber = phoneNumber;
+  }
   
   // Форматируем номер
   if (normalizedNumber.length === 0) return '';
